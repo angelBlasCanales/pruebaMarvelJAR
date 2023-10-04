@@ -23,6 +23,9 @@ public class MarvelJarController {
 		
 		try {
             CharacterDataWrapper dw = marvelJarService.getAllCharacters();
+            if (HttpStatus.OK.value() != dw.getCode()) {
+				return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+			}
             return ResponseEntity.ok(dw);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
